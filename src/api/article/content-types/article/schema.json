@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Article"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "post_title": {
+      "type": "string",
+      "required": true
+    },
+    "question": {
+      "type": "boolean",
+      "required": true
+    },
+    "upload_pic": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "tags": {
+      "type": "json",
+      "required": true
+    },
+    "social_link": {
+      "type": "text"
+    },
+    "likes": {
+      "type": "json"
+    },
+    "comments": {
+      "type": "json"
+    },
+    "categories": {
+      "type": "enumeration",
+      "enum": [
+        "General",
+        "Health",
+        "Products",
+        "Routines",
+        "Services",
+        "Limited Time Offer"
+      ],
+      "required": true
+    },
+    "publisher_id": {
+      "type": "text"
+    }
+  }
+}
