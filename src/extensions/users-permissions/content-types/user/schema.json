@@ -66,11 +66,12 @@
       "configurable": false
     },
     "profile_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "phone_number": {
       "type": "integer",
@@ -90,6 +91,18 @@
     },
     "tiktok_link": {
       "type": "text"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article",
+      "mappedBy": "publisher"
     }
   }
 }
