@@ -53,7 +53,9 @@
         "Product",
         "Routine",
         "Services",
-        "Limited Time Offer"
+        "Giveaways",
+        "Deals",
+        "Events"
       ],
       "required": true
     },

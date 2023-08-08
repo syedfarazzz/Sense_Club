@@ -74,8 +74,7 @@
       ]
     },
     "phone_number": {
-      "type": "integer",
-      "max": 1e+44
+      "type": "biginteger"
     },
     "fb_link": {
       "type": "text"
