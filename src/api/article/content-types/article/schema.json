@@ -67,6 +67,9 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "articles"
+    },
+    "uploadPic": {
+      "type": "string"
     }
   }
 }
