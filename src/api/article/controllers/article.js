@@ -42,4 +42,41 @@ module.exports = createCoreController('api::article.article', ({strapi}) => ({
         }
     },
 
+    async find(ctx, next)
+    {
+        
+        try
+        {
+            let data = await strapi.entityService.findMany('api::article.article', {
+                populate: '*'
+              });
+
+            // @ts-ignore
+            const { meta } = await super.find(ctx);
+            
+            return { data, meta }
+        
+        }
+
+        catch(err)
+        {
+            console.log(err);
+        }
+    },
+
+    async findOne(ctx) {
+        try
+        {
+            let data = await strapi.entityService.findOne('api::article.article', ctx.request.params.id, {
+                populate: '*'
+              });
+
+            return { data }   
+        }
+
+        catch(err)
+        {
+            console.log(err);
+        }
+      }
 }));
