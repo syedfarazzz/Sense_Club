@@ -53,7 +53,6 @@ module.exports = createCoreController('api::article.article', ({strapi}) => ({
 
             // @ts-ignore
             const { meta } = await super.find(ctx);
-            
             return { data, meta }
         
         }
