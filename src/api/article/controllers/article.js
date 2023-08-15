@@ -47,11 +47,12 @@ module.exports = createCoreController('api::article.article', ({strapi}) => ({
         
         try
         {
-            let data = await strapi.entityService.findMany('api::article.article', {
-                populate: '*'
-              });
+            // let data = await strapi.entityService.findMany('api::article.article', {
+            //     populate: '*'
+            //   });
 
-            // @ts-ignore
+            let data = await strapi.service('api::article.article').loadArticles();
+
             const { meta } = await super.find(ctx);
             return { data, meta }
         
@@ -66,11 +67,13 @@ module.exports = createCoreController('api::article.article', ({strapi}) => ({
     async findOne(ctx) {
         try
         {
-            let data = await strapi.entityService.findOne('api::article.article', ctx.request.params.id, {
-                populate: '*'
-              });
+            // let data = await strapi.entityService.findOne('api::article.article', ctx.request.params.id, {
+            //     populate: '*'
+            //   });
 
-            return { data }   
+            let entity = await strapi.service('api::article.article').findArticle(ctx.request.params.id);
+       
+            return entity;   
         }
 
         catch(err)
