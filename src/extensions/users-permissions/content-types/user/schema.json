@@ -105,6 +105,9 @@
     },
     "dob": {
       "type": "string"
+    },
+    "profilePic": {
+      "type": "string"
     }
   }
 }
