@@ -16,7 +16,8 @@ module.exports = createCoreController('api::article.article', ({strapi}) => ({
         const currentUser = ctx.state.user
 
         // get request body data from context
-        const  {post_title, question, upload_pic, description, tags, social_link, likes, comments, categories, uploadPic}  = ctx.request.body.data
+        // const  {post_title, question, upload_pic, description, tags, social_link, likes, comments, categories, uploadPic}  = ctx.request.body.data
+        //the above way is commented out as it can be used with spread operator ...ctx.req.bd.data
 
         try
         {
@@ -25,7 +26,8 @@ module.exports = createCoreController('api::article.article', ({strapi}) => ({
         {
             data: 
             {
-                post_title, question, upload_pic, description, tags, social_link, likes, comments, categories, uploadPic,
+                // post_title, question, upload_pic, description, tags, social_link, likes, comments, categories, uploadPic,
+                ...ctx.request.body.data,
 
                 // pass in the publisher id to define the publisher
                 publisher: currentUser.id,

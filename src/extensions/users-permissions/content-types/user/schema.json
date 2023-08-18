@@ -108,6 +108,9 @@
     },
     "profilePic": {
       "type": "string"
+    },
+    "fcm": {
+      "type": "string"
     }
   }
 }

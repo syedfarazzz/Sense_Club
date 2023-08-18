@@ -42,9 +42,6 @@
     "likes": {
       "type": "json"
     },
-    "comments": {
-      "type": "json"
-    },
     "categories": {
       "type": "enumeration",
       "enum": [
@@ -73,6 +70,12 @@
     },
     "views": {
       "type": "integer"
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::comment.comment",
+      "mappedBy": "article"
     }
   }
 }

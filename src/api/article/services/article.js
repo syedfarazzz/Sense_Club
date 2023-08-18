@@ -14,6 +14,13 @@ module.exports = createCoreService('api::article.article', ({ strapi }) => ({
                 publisher: {
                     // fields: ['username']
                     fields: ['*']
+                },
+                comments: {
+                    populate: {
+                        owner: {
+                            fields: ['id' , 'username']
+                        }
+                    }
                 }
                 
             }
@@ -27,6 +34,13 @@ module.exports = createCoreService('api::article.article', ({ strapi }) => ({
             populate: {
                 publisher: {
                     fields: ['*']
+                },
+                comments: {
+                    populate: {
+                        owner: {
+                            fields: ['id' , 'username']
+                        }
+                    }
                 }
             }
         });
