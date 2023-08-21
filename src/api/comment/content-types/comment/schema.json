@@ -25,6 +25,9 @@
     },
     "commentText": {
       "type": "text"
+    },
+    "replies": {
+      "type": "json"
     }
   }
 }

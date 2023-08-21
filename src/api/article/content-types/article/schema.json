@@ -56,9 +56,6 @@
       ],
       "required": true
     },
-    "publisher_id": {
-      "type": "text"
-    },
     "publisher": {
       "type": "relation",
       "relation": "manyToOne",

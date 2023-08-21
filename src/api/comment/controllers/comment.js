@@ -8,26 +8,74 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::comment.comment' , ({ strapi }) => ({
     async create(ctx) {
+            const currentUserId = ctx.state.user.id;
+            
         try{
             let result = await strapi.service('api::comment.comment').createComment({
                 ...ctx.request.body.data,
-                owner: ctx.state.user.id
+                owner: currentUserId
             });
+            
             var article = await strapi.service('api::article.article').findArticle(ctx.request.body.data.article);
-            console.log(article);
-            var owner = await strapi.entityService.findOne('plugin::users-permissions.user', article.publisher.id);
-    
-            strapi.notification.sendNotification(owner.fcm, {
+
+            const publisherId = article.publisher.id;
+            const publisher = article.publisher.fcm;  
+
+            if (currentUserId !== publisherId)
+            {
+            strapi.notification.sendNotification(publisher, {
                 notification: {
                     title: `${ctx.state.user.username} commented on your Article`,
                     body: `${article.post_title}`
                 }
             });
+            }
+
             ctx.body = result;
+
         }
 
         catch(err){
             console.log(err);
         }
-    }
+    },
+
+    commentReply: async (ctx, next) => {
+
+        const {id} = ctx.request.params
+        const currentUserId = ctx.state.user.id
+        const username = ctx.state.user.username
+        const newReply = ctx.request.body.replies; 
+
+        // const numberOfIndexes = replies.length;
+        // replies[numberOfIndexes-1].username = username;
+        newReply.username = username;
+
+        try 
+        {
+            var comment = await strapi.service('api::comment.comment').findComment(id);
+
+            comment.replies.push(newReply);
+            
+            const updatedReplies = await strapi.service("api::comment.comment").updateReply(id, comment.replies);
+
+            if (currentUserId !== comment.owner.id)
+            {
+                strapi.notification.sendNotification(comment.owner.fcm, {
+                    notification: {
+                        title: `${username} replied to your comment on`,
+                        body: `${comment.commentText}`
+                    }
+                });
+            }
+
+            return updatedReplies;
+        }
+
+        catch (er)
+        {
+            console.log(er);
+        }   
+
+    },
 }));
