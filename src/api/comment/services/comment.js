@@ -17,7 +17,7 @@ module.exports = createCoreService('api::comment.comment' , ({ strapi }) => ({
                 data: {
     
                     commentText: params.commentText,
-                    replies: params.replies,
+                    replies: [],
                     article: params.article,
                     owner: params.owner,
                     publishedAt: new Date()

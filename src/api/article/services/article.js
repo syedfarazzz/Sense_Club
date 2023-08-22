@@ -38,7 +38,7 @@ module.exports = createCoreService('api::article.article', ({ strapi }) => ({
                 comments: {
                     populate: {
                         owner: {
-                            fields: ['id' , 'username']
+                            fields: ['id' , 'username', 'profilePic']
                         }
                     }
                 }
