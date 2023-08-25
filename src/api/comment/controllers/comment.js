@@ -45,11 +45,21 @@ module.exports = createCoreController('api::comment.comment' , ({ strapi }) => (
         const {id} = ctx.request.params
         const currentUserId = ctx.state.user.id
         const username = ctx.state.user.username
-        const newReply = ctx.request.body.replies; 
+        const profilePic = ctx.state.user.profilePic;
+        const newReply = ctx.request.body.replies;
+        const createdAt = new Date();
+
+        const owner = {
+            username,
+            profilePic
+        }
 
         // const numberOfIndexes = replies.length;
         // replies[numberOfIndexes-1].username = username;
-        newReply.username = username;
+        // newReply.username = username;
+
+        newReply.owner = owner;
+        newReply.createdAt = createdAt;
 
         try 
         {
