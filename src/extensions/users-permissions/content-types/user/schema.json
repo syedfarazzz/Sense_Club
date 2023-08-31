@@ -111,6 +111,21 @@
     },
     "fcm": {
       "type": "string"
+    },
+    "aboutMe": {
+      "type": "text"
+    },
+    "following": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "follower"
+    },
+    "follower": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "following"
     }
   }
 }

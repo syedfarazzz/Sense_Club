@@ -25,8 +25,8 @@ module.exports = createCoreController('api::comment.comment' , ({ strapi }) => (
             {
             strapi.notification.sendNotification(publisher, {
                 notification: {
-                    title: `${ctx.state.user.username} commented on your Article`,
-                    body: `${article.post_title}`
+                    title: `${article.post_title}`,
+                    body: `${ctx.state.user.username} commented on your Article`
                 }
             });
             }
