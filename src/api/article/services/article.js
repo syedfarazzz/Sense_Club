@@ -10,19 +10,29 @@ module.exports = createCoreService('api::article.article', ({ strapi }) => ({
 
     loadArticles() {
         return strapi.entityService.findMany('api::article.article', {
-            populate: {
-                publisher: {
-                    // fields: ['username']
-                    fields: ['*']
+            populate: 
+            {
+                publisher: 
+                {
+                    // fields: ['*'],
+                    populate:
+                    {
+                        follower:
+                        {
+                            fields: ['id', 'username']
+                        }
+                    }
                 },
-                comments: {
-                    populate: {
-                        owner: {
-                            fields: ['id' , 'username']
+                comments: 
+                {
+                    populate: 
+                    {
+                        owner: 
+                        {
+                            fields: ['id' , 'username', 'profilePic']
                         }
                     }
                 }
-                
             }
         });
     },
@@ -31,17 +41,34 @@ module.exports = createCoreService('api::article.article', ({ strapi }) => ({
 
         return strapi.entityService.findOne('api::article.article', id, {
 
-            populate: {
-                publisher: {
-                    fields: ['*']
+            populate: 
+            {
+                publisher: 
+                {
+                    // fields: ['*'],
+                    populate:
+                    {
+                        follower:
+                        {
+                            fields: ['id', 'username']
+                        }
+                    }
                 },
-                comments: {
-                    populate: {
-                        owner: {
+                comments: 
+                {
+                    populate: 
+                    {
+                        owner: 
+                        {
                             fields: ['id' , 'username', 'profilePic']
                         }
                     }
-                }
+                },
+                likes:
+                    {
+                        fields: ['id', 'username']
+                    }
+                
             }
         });
 

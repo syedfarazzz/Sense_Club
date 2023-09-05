@@ -39,9 +39,6 @@
     "social_link": {
       "type": "text"
     },
-    "likes": {
-      "type": "json"
-    },
     "categories": {
       "type": "enumeration",
       "enum": [
@@ -73,6 +70,12 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "article"
+    },
+    "likes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "likedArticles"
     }
   }
 }

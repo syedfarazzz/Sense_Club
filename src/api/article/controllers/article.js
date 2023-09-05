@@ -66,7 +66,8 @@ module.exports = createCoreController('api::article.article', ({strapi}) => ({
         }
     },
 
-    async findOne(ctx) {
+    async findOne(ctx) 
+    {
         try
         {
             // let data = await strapi.entityService.findOne('api::article.article', ctx.request.params.id, {
@@ -82,5 +83,52 @@ module.exports = createCoreController('api::article.article', ({strapi}) => ({
         {
             console.log(err);
         }
-      }
+    },
+
+    followerArticle: async (ctx, next) => 
+    {
+        try
+        {
+            const currentUserId = ctx.state.user.id;
+            const folArticles = await strapi.entityService.findMany('api::article.article', 
+            {
+                filters: 
+                {
+                    publisher: 
+                    {
+                        follower:
+                        {
+                            id: currentUserId
+                        }
+                    }
+                },
+                populate: 
+                {
+                    publisher: 
+                    {
+                        fields: ['id', 'username', 'email', 'firstName', 'lastName', 'profilePic', 'fcm', 'aboutMe'],
+                        populate:
+                        {
+                            follower:
+                            {
+                                fields: ['id', 'username']
+                            }
+                        }
+                    },
+                    likes: 
+                    {
+                        fields:['id', 'username', 'email']
+                    }
+                }
+            });
+
+            ctx.body = folArticles
+
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+    }
+    
 }));

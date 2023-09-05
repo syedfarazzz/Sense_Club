@@ -13,7 +13,11 @@
         plugin.controllers.user.follow = async (ctx) => 
         {
             const currentUserId = ctx.state.user.id
-            const follow = ctx.request.body.data.follow;
+            // const follow = ctx.request.body.data.follow;
+            const id = ctx.request.params.id;
+            // console.log(typeof(id));
+            const follow = parseInt(id, 10); // Use parseInt with base 10
+            // console.log(typeof follow, follow);
 
             //Follow Other's Feature
             const oldList = await strapi.entityService.findOne('plugin::users-permissions.user', currentUserId, 
@@ -93,7 +97,7 @@
         **/
         {
             method: 'POST',
-            path: '/users/follow/',
+            path: '/users/follow/:id',
             handler: 'user.follow',
             config: {
                 prefix: '',
